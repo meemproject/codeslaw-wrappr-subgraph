@@ -1,0 +1,9 @@
+type Wrappr @entity {
+  id: ID! # address
+  name: String!
+  symbol: String!
+  baseURI: String! 
+  mintFee: BigInt!
+  admin: Bytes!
+}
+

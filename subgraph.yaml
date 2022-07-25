@@ -1,0 +1,24 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: WrapprFactory
+    network: rinkeby
+    source:
+      address: "0x52381F084DfAC4397B28A1298B0BB89139dFEe40"
+      abi: WrapprFactory
+      startBlock: 11082032
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Wrappr
+      abis:
+        - name: WrapprFactory
+          file: ./abis/WrapprFactory.json
+      eventHandlers:
+        - event: WrapprDeployed(indexed address,string,string,string,uint256,indexed address)
+          handler: handleWrapprDeployed
+      file: ./src/wrappr-factory.ts
