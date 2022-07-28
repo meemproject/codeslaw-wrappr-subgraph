@@ -4,8 +4,10 @@ import {
   WrapprDeployed
 } from "../generated/WrapprFactory/WrapprFactory"
 import { Wrappr } from "../generated/schema"
+import { Wrappr as WrapprTemplate } from '../generated/templates'
 
 export function handleWrapprDeployed(event: WrapprDeployed): void {
+  WrapprTemplate.create(event.params.wrappr)
   const wrappr = new Wrappr(event.params.wrappr.toHexString())
   
   wrappr.name = event.params.name 

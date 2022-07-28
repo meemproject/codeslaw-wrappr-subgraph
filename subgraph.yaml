@@ -22,3 +22,50 @@ dataSources:
         - event: WrapprDeployed(indexed address,string,string,string,uint256,indexed address)
           handler: handleWrapprDeployed
       file: ./src/wrappr-factory.ts
+templates:
+  - name: Wrappr
+    kind: ethereum/contract
+    network: rinkeby
+    source:
+      abi: Wrappr
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: ./src/wrappr.ts
+      entities:
+        - Wrappr
+      abis:
+        - name: Wrappr
+          file: ./abis/Wrappr.json
+      eventHandlers:
+        - event: AdminSet(indexed address,indexed address)
+          handler: handleAdminSet
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: BaseURIset(indexed address,string)
+          handler: handleBaseURIset
+        - event: DelegateChanged(indexed address,indexed address,indexed address,uint256)
+          handler: handleDelegateChanged
+        - event: DelegateVotesChanged(indexed address,indexed uint256,uint256,uint256)
+          handler: handleDelegateVotesChanged
+        - event: ManagerSet(indexed address,indexed address,bool)
+          handler: handleManagerSet
+        - event: MintFeeSet(indexed address,uint256)
+          handler: handleMintFeeSet
+        - event: OwnerOfSet(indexed address,indexed address,uint256)
+          handler: handleOwnerOfSet
+        - event: PermissionSet(indexed address,uint256,bool)
+          handler: handlePermissionSet
+        - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
+          handler: handleTransferBatch
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+        - event: TransferabilitySet(indexed address,uint256,bool)
+          handler: handleTransferabilitySet
+        - event: URI(string,indexed uint256)
+          handler: handleURI
+        - event: UserPermissionSet(indexed address,indexed address,uint256,bool)
+          handler: handleUserPermissionSet
+        - event: UserURIset(indexed address,indexed address,uint256,string)
+          handler: handleUserURIset
