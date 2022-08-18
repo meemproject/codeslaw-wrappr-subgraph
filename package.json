@@ -2,7 +2,6 @@
   "name": "wrappr",
   "license": "MIT",
   "scripts": {
-    "auth": "graph auth --product hosted-service a705f34d3b9c432392684ee65e638e37",
     "codegen": "graph codegen",
     "build": "graph build",
     "deploy": "graph deploy --node https://api.thegraph.com/deploy/ nerderlyne/wrappr",
