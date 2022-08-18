@@ -5,6 +5,5 @@ type Wrappr @entity {
   baseURI: String! 
   mintFee: BigInt!
   admin: Bytes!
-  operator: Bytes
 }
 

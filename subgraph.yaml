@@ -6,9 +6,9 @@ dataSources:
     name: WrapprFactory
     network: rinkeby
     source:
-      address: "0x52381F084DfAC4397B28A1298B0BB89139dFEe40"
       abi: WrapprFactory
-      startBlock: 11082032
+      address: "0xA945f46Ca376B18fB34d809ef4F21f9b58AE4C50"
+      startBlock: 11217310
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -19,7 +19,8 @@ dataSources:
         - name: WrapprFactory
           file: ./abis/WrapprFactory.json
       eventHandlers:
-        - event: WrapprDeployed(indexed address,string,string,string,uint256,indexed address)
+        - event: WrapprDeployed(indexed address,string,string,string,uint256,indexed
+            address)
           handler: handleWrapprDeployed
       file: ./src/wrappr-factory.ts
 templates:
@@ -57,9 +58,11 @@ templates:
           handler: handleOwnerOfSet
         - event: PermissionSet(indexed address,uint256,bool)
           handler: handlePermissionSet
-        - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
+        - event: TransferBatch(indexed address,indexed address,indexed
+            address,uint256[],uint256[])
           handler: handleTransferBatch
-        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+        - event: TransferSingle(indexed address,indexed address,indexed
+            address,uint256,uint256)
           handler: handleTransferSingle
         - event: TransferabilitySet(indexed address,uint256,bool)
           handler: handleTransferabilitySet

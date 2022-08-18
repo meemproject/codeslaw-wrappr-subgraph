@@ -17,13 +17,19 @@ import {
 } from "../generated/templates/Wrappr/Wrappr"
 import { Wrappr } from "../generated/schema"
 
-export function handleAdminSet(event: AdminSet): void {}
+export function handleAdminSet(event: AdminSet): void {
+  const wrappr = new Wrappr(event.address.toHexString())
+
+  wrappr.admin = event.params.admin
+  
+  wrappr.save()
+}
+
 export function handleApprovalForAll(event: ApprovalForAll): void {}
 
 export function handleBaseURIset(event: BaseURIset): void {
   const wrappr = new Wrappr(event.address.toHexString())
 
-  wrappr.operator = event.params.operator
   wrappr.baseURI = event.params.baseURI
   
   wrappr.save()
@@ -32,7 +38,15 @@ export function handleBaseURIset(event: BaseURIset): void {
 export function handleDelegateChanged(event: DelegateChanged): void {}
 export function handleDelegateVotesChanged(event: DelegateVotesChanged): void {}
 export function handleManagerSet(event: ManagerSet): void {}
-export function handleMintFeeSet(event: MintFeeSet): void {}
+
+export function handleMintFeeSet(event: MintFeeSet): void {
+  const wrappr = new Wrappr(event.address.toHexString())
+
+  wrappr.mintFee = event.params.mintFee
+  
+  wrappr.save()
+}
+
 export function handleOwnerOfSet(event: OwnerOfSet): void {}
 export function handlePermissionSet(event: PermissionSet): void {}
 export function handleTransferBatch(event: TransferBatch): void {}

@@ -1,8 +1,8 @@
 {
   "rinkeby": {
     "WrapprFactory": {
-      "address": "0x52381F084DfAC4397B28A1298B0BB89139dFEe40",
-      "startBlock": 11082032
+      "address": "0xA945f46Ca376B18fB34d809ef4F21f9b58AE4C50",
+      "startBlock": 11217310
     }
   }
 }
