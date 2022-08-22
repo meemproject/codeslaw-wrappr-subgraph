@@ -95,15 +95,15 @@ export function handleTransferSingle(event: TransferSingle): void {
     user.amount = user.amount.plus(event.params.amount)
     user.save()
   } else if (event.params.to.toHexString() == AddressZero) { // burn 
-    const user = User.load(event.address.toHexString() + event.params.id.toHexString() + event.params.to.toHexString())
+    const user = new User(event.address.toHexString() + event.params.id.toHexString() + event.params.to.toHexString())
     
-    if (user) {
-      if (user.amount) {
-        user.amount = user.amount.minus(event.params.amount)
+      if (!user.amount) {
+        user.amount = BigInt.fromI32(0)
       }
 
+      user.amount = user.amount.minus(event.params.amount)
+
       user.save()
-    }
   } else { // member to member
     const userFrom = new User(event.address.toHexString() + event.params.id.toHexString() + event.params.from.toHexString())
     const userTo = new User(event.address.toHexString() + event.params.id.toHexString() + event.params.to.toHexString())
