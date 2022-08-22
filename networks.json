@@ -4,5 +4,11 @@
       "address": "0xA945f46Ca376B18fB34d809ef4F21f9b58AE4C50",
       "startBlock": 11217310
     }
+  },
+  "goerli": {
+    "WrapprFactory": {
+      "address": "0xA945f46Ca376B18fB34d809ef4F21f9b58AE4C50",
+      "startBlock": 7419157
+    }
   }
 }

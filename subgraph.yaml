@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: WrapprFactory
-    network: rinkeby
+    network: goerli
     source:
       abi: WrapprFactory
       address: "0xA945f46Ca376B18fB34d809ef4F21f9b58AE4C50"
-      startBlock: 11217310
+      startBlock: 7419157
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -26,7 +26,7 @@ dataSources:
 templates:
   - name: Wrappr
     kind: ethereum/contract
-    network: rinkeby
+    network: goerli
     source:
       abi: Wrappr
     mapping:
