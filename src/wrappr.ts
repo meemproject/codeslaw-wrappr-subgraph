@@ -1,3 +1,4 @@
+import { BigInt, log } from "@graphprotocol/graph-ts"
 import {
   AdminSet,
   ApprovalForAll,
@@ -15,7 +16,8 @@ import {
   UserPermissionSet,
   UserURIset
 } from "../generated/templates/Wrappr/Wrappr"
-import { Wrappr, Collection, Manager } from "../generated/schema"
+import { Wrappr, Collection, Manager, User } from "../generated/schema"
+import { AddressZero } from "./constants"
 
 export function handleAdminSet(event: AdminSet): void {
   const wrappr = new Wrappr(event.address.toHexString())
@@ -37,6 +39,7 @@ export function handleBaseURIset(event: BaseURIset): void {
 
 export function handleDelegateChanged(event: DelegateChanged): void {}
 export function handleDelegateVotesChanged(event: DelegateVotesChanged): void {}
+
 export function handleManagerSet(event: ManagerSet): void {
   const manager = new Manager(event.address.toHexString() + event.params.to.toHexString())
 
@@ -57,7 +60,7 @@ export function handleMintFeeSet(event: MintFeeSet): void {
 export function handleOwnerOfSet(event: OwnerOfSet): void {
   const collection = new Collection(event.address.toHexString() + event.params.id.toHexString())
 
-  collection.tokenId = event.params.id
+  collection.collectionId = event.params.id
   collection.owner = event.params.to
   
   collection.save()
@@ -66,22 +69,94 @@ export function handleOwnerOfSet(event: OwnerOfSet): void {
 export function handlePermissionSet(event: PermissionSet): void {
   const collection = new Collection(event.address.toHexString() + event.params.id.toHexString())
 
-  collection.tokenId = event.params.id
+  collection.collectionId = event.params.id
   collection.transferability = event.params.set
   
   collection.save()
 }
+
+// TODO
 export function handleTransferBatch(event: TransferBatch): void {}
-export function handleTransferSingle(event: TransferSingle): void {}
+
+// REVIEW
+export function handleTransferSingle(event: TransferSingle): void {
+  const collection = new Collection(event.address.toHexString() + event.params.id.toHexString())
+  collection.collectionId = event.params.id
+
+  if (event.params.from.toHexString() == AddressZero) {  // mint
+    collection.transferability = false
+    collection.permissioned = false
+    const user = new User(event.address.toHexString() + event.params.id.toHexString() + event.params.to.toHexString())
+    
+    if (!user.amount) {
+      user.amount = BigInt.fromI32(0)
+    }
+
+    user.amount = user.amount.plus(event.params.amount)
+    user.save()
+  } else if (event.params.to.toHexString() == AddressZero) { // burn 
+    const user = User.load(event.address.toHexString() + event.params.id.toHexString() + event.params.to.toHexString())
+    
+    if (user) {
+      if (user.amount) {
+        user.amount = user.amount.minus(event.params.amount)
+      }
+
+      user.save()
+    }
+  } else { // member to member
+    const userFrom = new User(event.address.toHexString() + event.params.id.toHexString() + event.params.from.toHexString())
+    const userTo = new User(event.address.toHexString() + event.params.id.toHexString() + event.params.to.toHexString())
+
+    if (!userTo.amount) {
+      userTo.amount = BigInt.fromI32(0)
+    }
+
+    userTo.amount = userTo.amount.plus(event.params.amount)
+
+    if (!userFrom.amount) {
+      userFrom.amount = BigInt.fromI32(0)
+    }
+
+    userFrom.amount = userFrom.amount.minus(event.params.amount)
+
+    userTo.save()
+    userFrom.save()
+  }
+
+  collection.save()
+}
 
 export function handleTransferabilitySet(event: TransferabilitySet): void {
   const collection = new Collection(event.address.toHexString() + event.params.id.toHexString())
 
-  collection.tokenId = event.params.id
+  collection.collectionId = event.params.id
   collection.transferability = event.params.set
   
   collection.save()
 }
-export function handleURI(event: URI): void {}
-export function handleUserPermissionSet(event: UserPermissionSet): void {}
-export function handleUserURIset(event: UserURIset): void {}
+
+export function handleURI(event: URI): void {
+  const collection = new Collection(event.address.toHexString() + event.params.id.toHexString())
+
+  collection.uri = event.params.value 
+
+  collection.save()
+}
+
+export function handleUserPermissionSet(event: UserPermissionSet): void {
+  const user = new User(event.address.toHexString() + event.params.id.toHexString() + event.params.to.toHexString())
+
+  user.collection = event.address.toHexString() + event.params.id.toHexString()
+  user.permission = event.params.set
+
+  user.save()
+}
+export function handleUserURIset(event: UserURIset): void {
+  const user = new User(event.address.toHexString() + event.params.id.toHexString() + event.params.to.toHexString())
+
+  user.collection = event.address.toHexString() + event.params.id.toHexString()
+  user.uri = event.params.uuri
+
+  user.save()
+}

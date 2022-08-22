@@ -10,10 +10,12 @@ type Wrappr @entity {
 
 type Collection @entity {
   id: ID!
-  tokenId: BigInt!
+  collectionId: BigInt!
   owner: Bytes!
-  transferability: Boolean!
-  permissioned: Boolean!
+  transferability: Boolean
+  permissioned: Boolean
+  uri: String
+  users: [User!] @derivedFrom(field: "collection")
 }
 
 type Manager @entity {
@@ -22,3 +24,12 @@ type Manager @entity {
   address: Bytes!
   active: Boolean!
 }
+
+type User @entity {
+  id: ID! # wrappr contract address + collection ID + user address 
+  collection: Collection!
+  permission: Boolean
+  amount: BigInt
+  uri: String
+}
+
