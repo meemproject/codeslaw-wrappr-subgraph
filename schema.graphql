@@ -5,5 +5,20 @@ type Wrappr @entity {
   baseURI: String! 
   mintFee: BigInt!
   admin: Bytes!
+  managers: [Manager!] @derivedFrom(field: "wrappr")
 }
 
+type Collection @entity {
+  id: ID!
+  tokenId: BigInt!
+  owner: Bytes!
+  transferability: Boolean!
+  permissioned: Boolean!
+}
+
+type Manager @entity {
+  id: ID!
+  wrappr: Wrappr! 
+  address: Bytes!
+  active: Boolean!
+}
