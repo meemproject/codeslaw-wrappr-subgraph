@@ -29,7 +29,7 @@ type User @entity {
   id: ID! # wrappr contract address + collection ID + user address 
   collection: Collection!
   permission: Boolean
-  amount: BigInt
+  amount: BigInt!
   uri: String
 }
 

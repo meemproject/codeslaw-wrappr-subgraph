@@ -88,16 +88,17 @@ export function handleTransferSingle(event: TransferSingle): void {
     collection.permissioned = false
     const user = new User(event.address.toHexString() + event.params.id.toHexString() + event.params.to.toHexString())
     
-    if (!user.amount) {
+    if (user.amount === null) {
       user.amount = BigInt.fromI32(0)
-    }
-
+      user.amount = user.amount.plus(event.params.amount)
+    } 
     user.amount = user.amount.plus(event.params.amount)
+
     user.save()
   } else if (event.params.to.toHexString() == AddressZero) { // burn 
     const user = new User(event.address.toHexString() + event.params.id.toHexString() + event.params.to.toHexString())
     
-      if (!user.amount) {
+      if (user.amount === null) {
         user.amount = BigInt.fromI32(0)
       }
 
@@ -108,13 +109,13 @@ export function handleTransferSingle(event: TransferSingle): void {
     const userFrom = new User(event.address.toHexString() + event.params.id.toHexString() + event.params.from.toHexString())
     const userTo = new User(event.address.toHexString() + event.params.id.toHexString() + event.params.to.toHexString())
 
-    if (!userTo.amount) {
+    if (userTo.amount === null) {
       userTo.amount = BigInt.fromI32(0)
     }
 
     userTo.amount = userTo.amount.plus(event.params.amount)
 
-    if (!userFrom.amount) {
+    if (userFrom.amount === null) {
       userFrom.amount = BigInt.fromI32(0)
     }
 
