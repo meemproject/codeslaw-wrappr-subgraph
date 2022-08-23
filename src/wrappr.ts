@@ -16,7 +16,7 @@ import {
   UserPermissionSet,
   UserURIset
 } from "../generated/templates/Wrappr/Wrappr"
-import { Wrappr, Collection, Manager, User } from "../generated/schema"
+import { Wrappr, Collection, Manager, User, Account, Approval } from "../generated/schema"
 import { AddressZero } from "./constants"
 
 export function handleAdminSet(event: AdminSet): void {
@@ -27,7 +27,21 @@ export function handleAdminSet(event: AdminSet): void {
   wrappr.save()
 }
 
-export function handleApprovalForAll(event: ApprovalForAll): void {}
+export function handleApprovalForAll(event: ApprovalForAll): void {
+  const account = new Account(event.address.toHexString() + event.params.owner.toHexString())
+  
+  account.address = event.params.owner
+
+  account.save()
+
+  const approval = new Approval(event.address.toHexString() + event.params.owner.toHexString() + 'approval')
+
+  approval.account = event.address.toHexString() + event.params.owner.toHexString()
+  approval.address = event.params.operator
+  approval.approve = event.params.approved
+
+  approval.save()
+}
 
 export function handleBaseURIset(event: BaseURIset): void {
   const wrappr = new Wrappr(event.address.toHexString())

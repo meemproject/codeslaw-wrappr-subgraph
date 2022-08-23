@@ -25,6 +25,7 @@ type Manager @entity {
   active: Boolean!
 }
 
+# divide into account and users ?
 type User @entity {
   id: ID! # wrappr contract address + collection ID + user address 
   collection: Collection!
@@ -33,3 +34,15 @@ type User @entity {
   uri: String
 }
 
+type Account @entity {
+  id: ID! # wrappr contract address + account address 
+  address: Bytes!
+  approvals: [Approval!] @derivedFrom(field: "account")
+}
+
+type Approval @entity {
+  id: ID! # wrappr contract address + account address + 'approval'
+  account: Account!
+  address: Bytes!
+  approve: Boolean!
+}
