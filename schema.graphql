@@ -6,10 +6,12 @@ type Wrappr @entity {
   mintFee: BigInt!
   admin: Bytes!
   managers: [Manager!] @derivedFrom(field: "wrappr")
+  collections: [Collection!] @derivedFrom(field: "wrappr")
 }
 
 type Collection @entity {
   id: ID!
+  wrappr: Wrappr!
   collectionId: BigInt!
   owner: Bytes!
   transferability: Boolean
