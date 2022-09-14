@@ -5,7 +5,7 @@
     "codegen": "graph codegen",
     "build": "graph build",
     "deploy-goerli": "graph codegen && graph build --network goerli && graph deploy --node https://api.thegraph.com/deploy/ nerderlyne/wrappr-goerli",
-    "deploy-mainnet": "graph codegen && graph build --network mainnet && graph deploy --studio wrappr-mainnet",
+    "deploy-mainnet": "graph codegen && graph build --network mainnet && graph deploy --node https://api.thegraph.com/deploy/ nerderlyne/wrappr-mainnet",
     "deploy-optimism": "graph codegen && graph build --network optimism && graph deploy --node https://api.thegraph.com/deploy/ nerderlyne/wrappr-optimism",
     "deploy-bsc": "graph codegen && graph build --network bsc && graph deploy --node https://api.thegraph.com/deploy/ nerderlyne/wrappr-bsc",
     "deploy-xdai": "graph codegen && graph build --network xdai && graph deploy --node https://api.thegraph.com/deploy/ nerderlyne/wrappr-xdai",
