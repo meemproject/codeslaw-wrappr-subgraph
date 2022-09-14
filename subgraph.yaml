@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: WrapprFactory
-    network: bsc
+    network: avalanche
     source:
       abi: WrapprFactory
       address: "0xA945f46Ca376B18fB34d809ef4F21f9b58AE4C50"
-      startBlock: 20661558
+      startBlock: 18971154
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -26,7 +26,7 @@ dataSources:
 templates:
   - name: Wrappr
     kind: ethereum/contract
-    network: bsc
+    network: avalanche
     source:
       abi: Wrappr
     mapping:
