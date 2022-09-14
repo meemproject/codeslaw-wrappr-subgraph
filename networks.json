@@ -10,5 +10,53 @@
       "address": "0xA945f46Ca376B18fB34d809ef4F21f9b58AE4C50",
       "startBlock": 7419157
     }
+  },
+  "mainnet": {
+    "WrapprFactory": {
+      "address": "0xA945f46Ca376B18fB34d809ef4F21f9b58AE4C50",
+      "startBlock": 15389606
+    }
+  },
+  "optimism": {
+    "WrapprFactory": {
+      "address": "0xA945f46Ca376B18fB34d809ef4F21f9b58AE4C50",
+      "startBlock": 20146671
+    }
+  },
+  "bsc": {
+    "WrapprFactory": {
+      "address": "0xA945f46Ca376B18fB34d809ef4F21f9b58AE4C50",
+      "startBlock": 20661558
+    }
+  },
+  "xdai": {
+    "WrapprFactory": {
+      "address": "0xA945f46Ca376B18fB34d809ef4F21f9b58AE4C50",
+      "startBlock": 23828505
+    }
+  },
+  "matic": {
+    "WrapprFactory": {
+      "address": "0xA945f46Ca376B18fB34d809ef4F21f9b58AE4C50",
+      "startBlock": 32182984
+    }
+  },
+  "fantom": {
+    "WrapprFactory": {
+      "address": "0xA945f46Ca376B18fB34d809ef4F21f9b58AE4C50",
+      "startBlock": 45442765
+    }
+  },
+  "arbitrum-one": {
+    "WrapprFactory": {
+      "address": "0xA945f46Ca376B18fB34d809ef4F21f9b58AE4C50",
+      "startBlock": 20948140
+    }
+  },
+  "avalanche": {
+    "WrapprFactory": {
+      "address": "0xA945f46Ca376B18fB34d809ef4F21f9b58AE4C50",
+      "startBlock": 18971154
+    }
   }
 }
